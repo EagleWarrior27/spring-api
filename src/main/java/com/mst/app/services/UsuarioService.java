@@ -1,6 +1,6 @@
 package com.mst.app.services;
 
-import com.mst.app.persistence.entities.Usuario;
+import com.mst.app.models.Usuario;
 
 import java.util.List;
 import java.util.Optional;

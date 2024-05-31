@@ -1,12 +1,13 @@
 package com.mst.app.controllers;
 
-import com.mst.app.persistence.entities.Usuario;
+import com.mst.app.models.Usuario;
 import com.mst.app.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Optional;
 
 @RestController
@@ -21,7 +22,7 @@ public class UsuarioController {
     }
 
     @PostMapping
-    public ResponseEntity<?> create(@RequestBody Usuario usuario) {
+    public ResponseEntity<?> create(@RequestBody @Valid Usuario usuario) {
         return ResponseEntity.status(HttpStatus.CREATED).body(usuarioService.save(usuario));
     }
 
@@ -37,7 +38,7 @@ public class UsuarioController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> update(@PathVariable(value = "id") Integer id, @RequestBody Usuario usuarioInfo) {
+    public ResponseEntity<?> update(@PathVariable(value = "id") Integer id, @RequestBody @Valid Usuario usuarioInfo) {
         Optional<Usuario> usuario = usuarioService.findById(id);
 
         if(!usuario.isPresent()) {

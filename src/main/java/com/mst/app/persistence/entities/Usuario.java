@@ -1,39 +1,36 @@
 package com.mst.app.persistence.entities;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 
+@Data
 @Entity
 @Table(name = "usuarios")
 public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id_usuario")
     private Integer idUsuario;
+
     @Column(length = 90)
     private String nombre;
+
     @Column(name="correo", nullable = false, length = 60, unique = true)
     private String correo;
 
-    public Integer getIdUsuario() {
-        return idUsuario;
-    }
+    public Usuario() { }
 
-    public void setIdUsuario(Integer idUsuario) {
-        this.idUsuario = idUsuario;
-    }
+    public Integer getIdUsuario() { return idUsuario; }
 
-    public String getNombre() {
-        return nombre;
-    }
+    public void setIdUsuario(Integer idUsuario) { this.idUsuario = idUsuario; }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
+    public String getNombre() { return nombre; }
 
-    public String getCorreo() {
-        return correo;
-    }
+    public void setNombre(String nombre) { this.nombre = nombre; }
 
-    public void setCorreo(String correo) {
-        this.correo = correo;
-    }
+    public String getCorreo() { return correo; }
+
+    public void setCorreo(String correo) { this.correo = correo; }
 }

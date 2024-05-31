@@ -1,16 +1,13 @@
 package com.mst.app.controllers;
 
-import com.mst.app.entity.Usuario;
+import com.mst.app.persistence.entities.Usuario;
 import com.mst.app.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 @RestController
 @RequestMapping("/usuarios")
@@ -19,12 +16,8 @@ public class UsuarioController {
     private UsuarioService usuarioService;
 
     @GetMapping
-    public List<Usuario> readAll() {
-        List<Usuario> usuarios = StreamSupport
-                .stream(usuarioService.findAll().spliterator(), false)
-                .collect(Collectors.toList());
-
-        return usuarios;
+    public ResponseEntity<?> readAll() {
+        return ResponseEntity.ok(usuarioService.findAll());
     }
 
     @PostMapping
@@ -44,7 +37,7 @@ public class UsuarioController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> update(@RequestBody Usuario usuarioInfo, @PathVariable(value = "id") Integer id) {
+    public ResponseEntity<?> update(@PathVariable(value = "id") Integer id, @RequestBody Usuario usuarioInfo) {
         Optional<Usuario> usuario = usuarioService.findById(id);
 
         if(!usuario.isPresent()) {
@@ -53,7 +46,6 @@ public class UsuarioController {
 
         usuario.get().setNombre(usuarioInfo.getNombre());
         usuario.get().setCorreo(usuarioInfo.getCorreo());
-        usuario.get().setPassword(usuarioInfo.getPassword());
 
         return ResponseEntity.status(HttpStatus.CREATED).body(usuarioService.save(usuario.get()));
     }
@@ -65,6 +57,6 @@ public class UsuarioController {
         }
 
         usuarioService.deleteById(id);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 }

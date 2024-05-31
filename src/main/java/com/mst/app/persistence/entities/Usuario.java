@@ -1,4 +1,4 @@
-package com.mst.app.entity;
+package com.mst.app.persistence.entities;
 
 import javax.persistence.*;
 
@@ -12,7 +12,6 @@ public class Usuario {
     private String nombre;
     @Column(name="correo", nullable = false, length = 60, unique = true)
     private String correo;
-    private String password;
 
     public Integer getIdUsuario() {
         return idUsuario;
@@ -36,13 +35,5 @@ public class Usuario {
 
     public void setCorreo(String correo) {
         this.correo = correo;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 }

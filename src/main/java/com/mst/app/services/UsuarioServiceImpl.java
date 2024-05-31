@@ -1,13 +1,12 @@
 package com.mst.app.services;
 
-import com.mst.app.entity.Usuario;
-import com.mst.app.repository.UsuarioRepository;
+import com.mst.app.persistence.entities.Usuario;
+import com.mst.app.persistence.repositories.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -17,14 +16,8 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @Override
     @Transactional(readOnly = true)
-    public Iterable<Usuario> findAll() {
+    public List<Usuario> findAll() {
         return usuarioRepository.findAll();
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    public Page<Usuario> findAll(Pageable pageable) {
-        return usuarioRepository.findAll(pageable);
     }
 
     @Override

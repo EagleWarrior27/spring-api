@@ -1,19 +1,16 @@
 package com.mst.app.services;
 
-import com.mst.app.entity.Usuario;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import com.mst.app.persistence.entities.Usuario;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface UsuarioService {
-    public Iterable<Usuario> findAll();
+    List<Usuario> findAll();
 
-    public Page<Usuario> findAll(Pageable pageable);
+    Optional<Usuario> findById(Integer id);
 
-    public Optional<Usuario> findById(Integer id);
+    Usuario save(Usuario usuario);
 
-    public Usuario save(Usuario usuario);
-
-    public void deleteById(Integer id);
+    void deleteById(Integer id);
 }

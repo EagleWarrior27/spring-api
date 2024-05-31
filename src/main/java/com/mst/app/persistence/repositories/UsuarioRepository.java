@@ -1,6 +1,6 @@
-package com.mst.app.repository;
+package com.mst.app.persistence.repositories;
 
-import com.mst.app.entity.Usuario;
+import com.mst.app.persistence.entities.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
